@@ -53,33 +53,17 @@ angular.module('ng-resthelper', []).factory('RestApi', function($http, $q, $log)
         return _http('DELETE', uri, data, opts);
     }
 
-    function _handleArrayConfig(service, baseuri, config) {
-        var key = config[0].toLowerCase();
+    function _handleArrayConfig(service, baseuri, key, config) {
+        var method = config[0].toLowerCase();
         var uri = baseuri + config[1];
-        if (key === 'get') {
-            if (angular.isFunction(val)) {
-                service.get = val
-            }  else {
-                angular.bind(service, _get, uri);
-            }
-        } else if (key === 'post') {
-            if (angular.isFunction(val)) {
-                service.post = val
-            }  else {
-                angular.bind(service, _post, uri);
-            }
-        } else if (key === 'put') {
-            if (angular.isFunction(val)) {
-                service.put = val
-            }  else {
-                angular.bind(service, _put, uri);
-            }
-        } else if (key === 'remove') {
-            if (angular.isFunction(val)) {
-                service.remove = val
-            }  else {
-                angular.bind(service, _remove, uri);
-            }
+        if (method === 'get') {
+            service[key] = angular.bind(service, _get, uri);
+        } else if (method === 'post') {
+            service[key] = angular.bind(service, _post, uri);
+        } else if (method === 'put') {
+            service[key] = angular.bind(service, _put, uri);
+        } else if (method === 'remove') {
+            service[key] = angular.bind(service, _remove, uri);
         }
     }
 
@@ -98,33 +82,35 @@ angular.module('ng-resthelper', []).factory('RestApi', function($http, $q, $log)
                     if (angular.isFunction(val)) {
                         service.get = val
                     }  else {
-                        angular.bind(service, _get, uri);
+                        service.get = angular.bind(service, _get, uri);
                     }
                 } else if (key === 'post') {
                     if (angular.isFunction(val)) {
                         service.post = val
                     }  else {
-                        angular.bind(service, _post, uri);
+                        service.post = angular.bind(service, _post, uri);
                     }
                 } else if (key === 'put') {
                     if (angular.isFunction(val)) {
                         service.put = val
                     }  else {
-                        angular.bind(service, _put, uri);
+                        service.put = angular.bind(service, _put, uri);
                     }
                 } else if (key === 'remove') {
                     if (angular.isFunction(val)) {
                         service.remove = val
                     }  else {
-                        angular.bind(service, _remove, uri);
+                        service.remove = angular.bind(service, _remove, uri);
                     }
                 } else if (angular.isArray(val)) {
-                    _handleArrayConfig(service, baseuri, config)
+                    _handleArrayConfig(service, baseuri, key, val)
                 } else if (angular.isFunction(val)) {
                     service[key] = val;
                 }
             }
         }
+        console.log('rest api:', services);
+        return services;
     };
 
 });
