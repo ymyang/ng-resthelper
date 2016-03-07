@@ -1,0 +1,29 @@
+{
+  "name": "ng-resthelper",
+  "version": "1.0.0",
+  "description": "angular restful service api helper",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ymyang/ng-resthelper.git"
+  },
+  "keywords": [
+    "angular",
+    "restful",
+    "http"
+  ],
+  "author": "ymyang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ymyang/ng-resthelper/issues"
+  },
+  "homepage": "https://github.com/ymyang/ng-resthelper#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-ext-replace": "^0.2.0",
+    "gulp-uglify": "^1.5.3"
+  }
+}
